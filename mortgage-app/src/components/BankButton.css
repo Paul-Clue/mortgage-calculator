@@ -1,0 +1,7 @@
+/* BankButton styles — kept minimal since Ionic provides most of the styling. */
+
+.bank-button {
+  --border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}

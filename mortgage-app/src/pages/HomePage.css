@@ -1,0 +1,7 @@
+/* HomePage styles */
+
+.bank-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

@@ -1,0 +1,72 @@
+/* ==========================================================================
+   BankInfoPage Markdown Styles
+   --------------------------------------------------------------------------
+   Styles the rendered markdown content so tables, headings, links, and
+   code blocks display nicely within the Ionic layout.
+   ========================================================================== */
+
+.bank-info-markdown {
+  line-height: 1.6;
+}
+
+/* Tables should be full-width and scrollable on small screens. */
+.bank-info-markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+}
+
+.bank-info-markdown th,
+.bank-info-markdown td {
+  border: 1px solid var(--ion-color-medium);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.bank-info-markdown th {
+  background-color: var(--ion-color-light);
+  font-weight: 600;
+}
+
+/* Headings get extra spacing. */
+.bank-info-markdown h1,
+.bank-info-markdown h2,
+.bank-info-markdown h3 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+/* Links styled with the primary color. */
+.bank-info-markdown a {
+  color: var(--ion-color-primary);
+  text-decoration: underline;
+}
+
+/* Blockquotes styled with a left border. */
+.bank-info-markdown blockquote {
+  border-left: 4px solid var(--ion-color-primary);
+  margin: 16px 0;
+  padding: 8px 16px;
+  color: var(--ion-color-medium);
+  font-style: italic;
+}
+
+/* Horizontal rules. */
+.bank-info-markdown hr {
+  border: none;
+  border-top: 1px solid var(--ion-color-light-shade);
+  margin: 24px 0;
+}
+
+/* Lists. */
+.bank-info-markdown ul,
+.bank-info-markdown ol {
+  padding-left: 24px;
+}
+
+.bank-info-markdown li {
+  margin-bottom: 4px;
+}

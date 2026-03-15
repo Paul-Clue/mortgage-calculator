@@ -1,0 +1,109 @@
+/* ==========================================================================
+   Ionic Theme Variables — Jamaican Mortgage Calculator
+   --------------------------------------------------------------------------
+   Color palette: Black / Blue / White / Grey
+   Designed for high contrast and large touch targets on mobile devices.
+   ========================================================================== */
+
+:root {
+  /* ---- Primary: Blue ---- */
+  --ion-color-primary: #1A56DB;
+  --ion-color-primary-rgb: 26, 86, 219;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #164CC1;
+  --ion-color-primary-tint: #3167DF;
+
+  /* ---- Secondary: Black ---- */
+  --ion-color-secondary: #111827;
+  --ion-color-secondary-rgb: 17, 24, 39;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #0F1522;
+  --ion-color-secondary-tint: #292F3D;
+
+  /* ---- Tertiary: Slate blue for accents ---- */
+  --ion-color-tertiary: #3B82F6;
+  --ion-color-tertiary-rgb: 59, 130, 246;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #3473D8;
+  --ion-color-tertiary-tint: #4F8EF7;
+
+  /* ---- Success ---- */
+  --ion-color-success: #10B981;
+  --ion-color-success-rgb: 16, 185, 129;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #0EA372;
+  --ion-color-success-tint: #28C08E;
+
+  /* ---- Warning ---- */
+  --ion-color-warning: #F59E0B;
+  --ion-color-warning-rgb: 245, 158, 11;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #D88B0A;
+  --ion-color-warning-tint: #F6A823;
+
+  /* ---- Danger ---- */
+  --ion-color-danger: #EF4444;
+  --ion-color-danger-rgb: 239, 68, 68;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #D23C3C;
+  --ion-color-danger-tint: #F15757;
+
+  /* ---- Medium: Grey ---- */
+  --ion-color-medium: #6B7280;
+  --ion-color-medium-rgb: 107, 114, 128;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #5E6471;
+  --ion-color-medium-tint: #7A808D;
+
+  /* ---- Light ---- */
+  --ion-color-light: #F3F4F6;
+  --ion-color-light-rgb: 243, 244, 246;
+  --ion-color-light-contrast: #111827;
+  --ion-color-light-contrast-rgb: 17, 24, 39;
+  --ion-color-light-shade: #D6D7D9;
+  --ion-color-light-tint: #F4F5F7;
+
+  /* ---- Global backgrounds and text ---- */
+  --ion-background-color: #FFFFFF;
+  --ion-background-color-rgb: 255, 255, 255;
+  --ion-text-color: #111827;
+  --ion-text-color-rgb: 17, 24, 39;
+
+  /* ---- Toolbar ---- */
+  --ion-toolbar-background: #111827;
+  --ion-toolbar-color: #ffffff;
+
+  /* ---- Card ---- */
+  --ion-card-background: #ffffff;
+}
+
+/* ==========================================================================
+   Dark mode overrides (auto-detected via prefers-color-scheme)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #0F172A;
+    --ion-background-color-rgb: 15, 23, 42;
+    --ion-text-color: #F1F5F9;
+    --ion-text-color-rgb: 241, 245, 249;
+
+    --ion-toolbar-background: #1E293B;
+    --ion-toolbar-color: #F1F5F9;
+
+    --ion-card-background: #1E293B;
+
+    --ion-color-light: #1E293B;
+    --ion-color-light-rgb: 30, 41, 59;
+    --ion-color-light-contrast: #F1F5F9;
+    --ion-color-light-contrast-rgb: 241, 245, 249;
+    --ion-color-light-shade: #1A2536;
+    --ion-color-light-tint: #344155;
+  }
+}
