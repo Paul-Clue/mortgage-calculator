@@ -179,7 +179,8 @@ export function validateOptionalAmount(
 /**
  * Parse a string into a number, returning undefined if the string is
  * empty or not a valid number. This is used for form inputs that might
- * contain empty strings.
+ * contain empty strings. Commas are stripped before parsing so that
+ * comma-formatted monetary inputs (e.g. "20,000,000") work correctly.
  *
  * @param value - The string value from an input field
  * @returns The parsed number, or undefined if empty/invalid
@@ -188,7 +189,9 @@ export function parseNumericInput(value: string): number | undefined {
   if (value === '' || value === undefined || value === null) {
     return undefined;
   }
-  const num = Number(value);
+  // Strip commas so comma-formatted values parse correctly.
+  const cleaned = value.replace(/,/g, '');
+  const num = Number(cleaned);
   if (isNaN(num)) {
     return undefined;
   }

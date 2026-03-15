@@ -62,6 +62,56 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
   /* ---- Validation error messages ---- */
   const [errors, setErrors] = useState<Record<string, string | null>>({});
 
+  /**
+   * Format a raw numeric string with commas for display (e.g. "20000000" → "20,000,000").
+   * Handles decimals by only formatting the integer part. Returns empty string for empty input.
+   */
+  const addCommas = (value: string): string => {
+    if (!value) return '';
+    const [integerPart, decimalPart] = value.split('.');
+    const formatted = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return decimalPart !== undefined ? `${formatted}.${decimalPart}` : formatted;
+  };
+
+  /**
+   * Handle input for monetary fields. Strips everything except digits and
+   * a single decimal point, then stores the clean numeric string in state.
+   * The display value is formatted with commas via addCommas().
+   */
+  const handleMoneyInput = (
+    rawValue: string | null | undefined,
+    setter: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    const value = rawValue ?? '';
+    // Strip commas and any non-numeric characters except digits and decimal point.
+    const cleaned = value.replace(/[^0-9.]/g, '');
+    // Prevent multiple decimal points — keep only the first one.
+    const parts = cleaned.split('.');
+    const sanitized = parts.length > 2
+      ? parts[0] + '.' + parts.slice(1).join('')
+      : cleaned;
+    setter(sanitized);
+  };
+
+  /**
+   * Prevent non-numeric characters from being typed into monetary fields.
+   * Attached as an onKeyDown handler. Allows digits, decimal point, Backspace,
+   * Delete, Tab, arrow keys, and common keyboard shortcuts (Ctrl/Cmd+A/C/V/X).
+   */
+  const blockNonNumericKeys = (e: React.KeyboardEvent) => {
+    const allowedKeys = [
+      'Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight',
+      'ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter',
+    ];
+    if (allowedKeys.includes(e.key)) return;
+    // Allow Ctrl/Cmd shortcuts (select all, copy, paste, cut).
+    if (e.ctrlKey || e.metaKey) return;
+    // Allow digits and a single decimal point.
+    if (/^[0-9.]$/.test(e.key)) return;
+    // Block everything else.
+    e.preventDefault();
+  };
+
   /* ---- Pre-fill from bank defaults when a bank is selected ---- */
   useEffect(() => {
     if (bank) {
@@ -215,11 +265,12 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         <IonInput
           label="Price of Home or Land (JMD)"
           labelPlacement="stacked"
-          type="number"
-          inputMode="decimal"
-          placeholder="e.g. 20000000"
-          value={propertyPrice}
-          onIonInput={(e) => setPropertyPrice(e.detail.value ?? '')}
+          type="text"
+          inputMode="numeric"
+          placeholder="e.g. 20,000,000"
+          value={addCommas(propertyPrice)}
+          onIonInput={(e) => handleMoneyInput(e.detail.value, setPropertyPrice)}
+          onKeyDown={blockNonNumericKeys}
           required
         />
       </IonItem>
@@ -322,11 +373,12 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         <IonInput
           label="Gross Monthly Salary (JMD, optional)"
           labelPlacement="stacked"
-          type="number"
-          inputMode="decimal"
-          placeholder="e.g. 300000"
-          value={monthlySalary}
-          onIonInput={(e) => setMonthlySalary(e.detail.value ?? '')}
+          type="text"
+          inputMode="numeric"
+          placeholder="e.g. 300,000"
+          value={addCommas(monthlySalary)}
+          onIonInput={(e) => handleMoneyInput(e.detail.value, setMonthlySalary)}
+          onKeyDown={blockNonNumericKeys}
         />
       </IonItem>
       {errors.monthlySalary && (
@@ -344,11 +396,12 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         <IonInput
           label="Total Monthly Debt Payments (JMD, optional)"
           labelPlacement="stacked"
-          type="number"
-          inputMode="decimal"
-          placeholder="e.g. 50000"
-          value={totalMonthlyDebt}
-          onIonInput={(e) => setTotalMonthlyDebt(e.detail.value ?? '')}
+          type="text"
+          inputMode="numeric"
+          placeholder="e.g. 50,000"
+          value={addCommas(totalMonthlyDebt)}
+          onIonInput={(e) => handleMoneyInput(e.detail.value, setTotalMonthlyDebt)}
+          onKeyDown={blockNonNumericKeys}
         />
       </IonItem>
       {errors.totalMonthlyDebt && (
@@ -362,11 +415,12 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         <IonInput
           label="Annual Property Tax (JMD, optional)"
           labelPlacement="stacked"
-          type="number"
-          inputMode="decimal"
-          placeholder="e.g. 50000"
-          value={annualPropertyTax}
-          onIonInput={(e) => setAnnualPropertyTax(e.detail.value ?? '')}
+          type="text"
+          inputMode="numeric"
+          placeholder="e.g. 50,000"
+          value={addCommas(annualPropertyTax)}
+          onIonInput={(e) => handleMoneyInput(e.detail.value, setAnnualPropertyTax)}
+          onKeyDown={blockNonNumericKeys}
         />
       </IonItem>
       {errors.annualPropertyTax && (
@@ -380,11 +434,12 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         <IonInput
           label="Annual Home Insurance (JMD, optional)"
           labelPlacement="stacked"
-          type="number"
-          inputMode="decimal"
-          placeholder="e.g. 75000"
-          value={annualInsurance}
-          onIonInput={(e) => setAnnualInsurance(e.detail.value ?? '')}
+          type="text"
+          inputMode="numeric"
+          placeholder="e.g. 75,000"
+          value={addCommas(annualInsurance)}
+          onIonInput={(e) => handleMoneyInput(e.detail.value, setAnnualInsurance)}
+          onKeyDown={blockNonNumericKeys}
         />
       </IonItem>
       {errors.annualInsurance && (
