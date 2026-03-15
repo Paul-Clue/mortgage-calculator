@@ -6,7 +6,7 @@
    time via Vite's ?raw import (handled in bankRegistry.ts).
    ========================================================================== */
 
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   IonContent,
   IonHeader,
@@ -14,13 +14,13 @@ import {
   IonTitle,
   IonToolbar,
   IonButtons,
-  IonBackButton,
   IonButton,
 } from '@ionic/react';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 import { getBankById } from '../data/banks';
 import { getBankMarkdown } from '../data/bankRegistry';
+import BackButton from '../components/BackButton';
 import './BankInfoPage.css';
 
 /**
@@ -29,9 +29,9 @@ import './BankInfoPage.css';
  */
 const BankInfoPage: React.FC = () => {
   const { bankId } = useParams<{ bankId: string }>();
-  const history = useHistory();
-  const bank = getBankById(bankId);
-  const markdown = getBankMarkdown(bankId);
+  const navigate = useNavigate();
+  const bank = getBankById(bankId!);
+  const markdown = getBankMarkdown(bankId!);
 
   // If bank or markdown not found, show an error message.
   if (!bank || !markdown) {
@@ -40,7 +40,7 @@ const BankInfoPage: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
+              <BackButton defaultHref="/" />
             </IonButtons>
             <IonTitle>Bank Info</IonTitle>
           </IonToolbar>
@@ -57,11 +57,11 @@ const BankInfoPage: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref={`/bank/${bankId}`} />
+            <BackButton defaultHref={`/bank/${bankId}`} />
           </IonButtons>
           <IonTitle>{bank.name} Info</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => history.push('/')}>Home</IonButton>
+            <IonButton onClick={() => navigate('/')}>Home</IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>

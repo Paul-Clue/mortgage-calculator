@@ -7,7 +7,7 @@
    ========================================================================== */
 
 import { useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   IonContent,
   IonHeader,
@@ -15,13 +15,13 @@ import {
   IonTitle,
   IonToolbar,
   IonButtons,
-  IonBackButton,
   IonButton,
 } from '@ionic/react';
 import { getBankById } from '../data/banks';
 import { MortgageInput, calculateMortgage, MortgageResult } from '../calculators/mortgage';
 import MortgageForm from '../components/MortgageForm';
 import ResultsDisplay from '../components/ResultsDisplay';
+import BackButton from '../components/BackButton';
 
 /**
  * Bank calculator page. Fetches bank config from the URL param and passes
@@ -29,8 +29,8 @@ import ResultsDisplay from '../components/ResultsDisplay';
  */
 const BankCalculatorPage: React.FC = () => {
   const { bankId } = useParams<{ bankId: string }>();
-  const history = useHistory();
-  const bank = getBankById(bankId);
+  const navigate = useNavigate();
+  const bank = getBankById(bankId!);
 
   // Holds the calculation result after the form is submitted.
   const [result, setResult] = useState<MortgageResult | null>(null);
@@ -42,7 +42,7 @@ const BankCalculatorPage: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
+              <BackButton defaultHref="/" />
             </IonButtons>
             <IonTitle>Bank Not Found</IonTitle>
           </IonToolbar>
@@ -65,11 +65,11 @@ const BankCalculatorPage: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
+            <BackButton defaultHref="/" />
           </IonButtons>
           <IonTitle>{bank.name} Calculator</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => history.push('/')}>Home</IonButton>
+            <IonButton onClick={() => navigate('/')}>Home</IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -80,14 +80,14 @@ const BankCalculatorPage: React.FC = () => {
           <IonButton
             fill="outline"
             size="small"
-            onClick={() => history.push(`/bank/${bankId}/info`)}
+            onClick={() => navigate(`/bank/${bankId}/info`)}
           >
             View Bank Details
           </IonButton>
         </div>
 
         {/* The mortgage input form, pre-filled with this bank's defaults. */}
-        <MortgageForm bank={bank} onCalculate={handleCalculate} />
+        <MortgageForm bank={bank} onCalculate={handleCalculate} onReset={() => setResult(null)} />
 
         {/* Results appear below the form after calculation. */}
         {result && <ResultsDisplay result={result} />}

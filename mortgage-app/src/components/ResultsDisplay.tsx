@@ -157,11 +157,11 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result }) => {
                 <IonLabel slot="end">{result.tdsrPercent!.toFixed(1)}%</IonLabel>
               </IonItem>
 
-              {/* Bank limit fields only show when a bank was selected. */}
+              {/* TDSR limit, max allowed debt, and eligibility fields. */}
               {result.bankTdsrLimitPercent !== undefined && (
                 <>
                   <IonItem>
-                    <IonLabel>Bank TDSR Limit</IonLabel>
+                    <IonLabel>TDSR Limit</IonLabel>
                     <IonLabel slot="end">{result.bankTdsrLimitPercent}%</IonLabel>
                   </IonItem>
                   <IonItem>

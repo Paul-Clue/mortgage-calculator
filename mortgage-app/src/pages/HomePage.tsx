@@ -14,7 +14,7 @@ import {
   IonToolbar,
   IonButton,
 } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { banks } from '../data/banks';
 import BankButton from '../components/BankButton';
 import './HomePage.css';
@@ -23,7 +23,7 @@ import './HomePage.css';
  * Home page listing all available banks and the generic calculator option.
  */
 const HomePage: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <IonPage>
@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
           <IonButton
             expand="block"
             color="primary"
-            onClick={() => history.push('/generic')}
+            onClick={() => navigate('/generic')}
             style={{ minHeight: '52px', fontSize: '1rem' }}
           >
             Generic Mortgage Calculator
