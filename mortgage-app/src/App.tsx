@@ -8,13 +8,17 @@
      /bank/:id/info → BankInfoPage (rendered markdown)
      /generic   → GenericCalculatorPage (empty form)
    
+   Uses React Router v6 (BrowserRouter + Routes) instead of
+   @ionic/react-router, which only supports React Router v5.
+   Ionic UI components (IonPage, IonContent, etc.) work fine without it.
+
    Pages are lazy-loaded via React.lazy() for better initial load performance.
    ========================================================================== */
 
 import React, { Suspense } from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonSpinner, setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { IonApp, IonSpinner, setupIonicReact } from '@ionic/react';
+import ErrorBoundary from './components/ErrorBoundary';
 
 /* ---- Lazy-loaded pages for code splitting ---- */
 const HomePage = React.lazy(() => import('./pages/HomePage'));
@@ -57,36 +61,28 @@ const PageLoader: React.FC = () => (
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
+    <BrowserRouter>
+      <ErrorBoundary>
         <Suspense fallback={<PageLoader />}>
-          {/* Home page — list of banks + generic calculator button */}
-          <Route exact path="/home">
-            <HomePage />
-          </Route>
+          <Routes>
+            {/* Home page — list of banks + generic calculator button */}
+            <Route path="/home" element={<HomePage />} />
 
-          {/* Bank-specific calculator — pre-filled with bank defaults */}
-          <Route exact path="/bank/:bankId">
-            <BankCalculatorPage />
-          </Route>
+            {/* Bank-specific calculator — pre-filled with bank defaults */}
+            <Route path="/bank/:bankId" element={<BankCalculatorPage />} />
 
-          {/* Bank info page — rendered markdown content */}
-          <Route exact path="/bank/:bankId/info">
-            <BankInfoPage />
-          </Route>
+            {/* Bank info page — rendered markdown content */}
+            <Route path="/bank/:bankId/info" element={<BankInfoPage />} />
 
-          {/* Generic calculator — all fields start empty */}
-          <Route exact path="/generic">
-            <GenericCalculatorPage />
-          </Route>
+            {/* Generic calculator — all fields start empty */}
+            <Route path="/generic" element={<GenericCalculatorPage />} />
 
-          {/* Default redirect to home */}
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
+            {/* Default redirect to home */}
+            <Route path="/" element={<Navigate to="/home" replace />} />
+          </Routes>
         </Suspense>
-      </IonRouterOutlet>
-    </IonReactRouter>
+      </ErrorBoundary>
+    </BrowserRouter>
   </IonApp>
 );
 

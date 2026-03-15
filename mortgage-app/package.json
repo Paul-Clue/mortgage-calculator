@@ -18,15 +18,11 @@
     "@capacitor/keyboard": "8.0.1",
     "@capacitor/status-bar": "8.0.1",
     "@ionic/react": "^8.5.0",
-    "@ionic/react-router": "^8.5.0",
-    "@types/react-router": "^5.1.20",
-    "@types/react-router-dom": "^5.3.3",
     "ionicons": "^7.4.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-markdown": "^10.1.0",
-    "react-router": "^5.3.4",
-    "react-router-dom": "^5.3.4",
+    "react-router-dom": "^6.30.3",
     "rehype-sanitize": "^6.0.0"
   },
   "devDependencies": {

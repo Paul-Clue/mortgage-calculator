@@ -6,7 +6,7 @@
    ========================================================================== */
 
 import { IonButton } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface BankButtonProps {
   /** The bank's unique ID slug used in the route (e.g. "jn-bank") */
@@ -21,11 +21,11 @@ interface BankButtonProps {
  * Navigates to /bank/:bankId when tapped.
  */
 const BankButton: React.FC<BankButtonProps> = ({ bankId, bankName }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   /** Navigate to the bank calculator page. */
   const handleClick = () => {
-    history.push(`/bank/${bankId}`);
+    navigate(`/bank/${bankId}`);
   };
 
   return (

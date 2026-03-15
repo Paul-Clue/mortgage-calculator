@@ -6,7 +6,7 @@
    ========================================================================== */
 
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   IonContent,
   IonHeader,
@@ -14,18 +14,18 @@ import {
   IonTitle,
   IonToolbar,
   IonButtons,
-  IonBackButton,
   IonButton,
 } from '@ionic/react';
 import { MortgageInput, calculateMortgage, MortgageResult } from '../calculators/mortgage';
 import MortgageForm from '../components/MortgageForm';
 import ResultsDisplay from '../components/ResultsDisplay';
+import BackButton from '../components/BackButton';
 
 /**
  * Generic calculator page — no bank defaults. The user enters all values.
  */
 const GenericCalculatorPage: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // Holds the calculation result after form submission.
   const [result, setResult] = useState<MortgageResult | null>(null);
@@ -41,11 +41,11 @@ const GenericCalculatorPage: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
+            <BackButton defaultHref="/" />
           </IonButtons>
           <IonTitle>Generic Calculator</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => history.push('/')}>Home</IonButton>
+            <IonButton onClick={() => navigate('/')}>Home</IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>

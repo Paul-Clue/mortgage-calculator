@@ -74,7 +74,7 @@ export const banks: BankConfig[] = [
   {
     id: 'sagicor',
     name: 'Sagicor',
-    interestRates: [6.75, 8.0, 10.0, 12.0],
+    interestRates: [6.75, 8.0, 9.0, 10.0, 12.0],
     defaultRate: 9.0,
     maxLTV: 90,
     defaultLTV: 90,

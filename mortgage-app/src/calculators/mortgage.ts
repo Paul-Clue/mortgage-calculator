@@ -183,9 +183,15 @@ export function calculateMortgage(input: MortgageInput): MortgageResult {
   };
 
   // Calculate TDSR fields only when salary and debt data are both provided.
+  // TDSR includes the new mortgage payment + tax + insurance on top of existing debt,
+  // because banks evaluate whether the borrower can handle ALL obligations combined.
   if (input.monthlySalary && input.totalMonthlyDebtPayments !== undefined) {
-    // TDSR = total monthly debt payments / gross monthly income.
-    const tdsrDecimal = input.totalMonthlyDebtPayments / input.monthlySalary;
+    // Total monthly obligations = existing debt + new housing costs.
+    const totalMonthlyObligations =
+      input.totalMonthlyDebtPayments + totalMonthlyHousingCost;
+
+    // TDSR = total monthly obligations / gross monthly income.
+    const tdsrDecimal = totalMonthlyObligations / input.monthlySalary;
     result.tdsrPercent = tdsrDecimal * 100;
 
     // If a bank TDSR limit was provided, compute eligibility.

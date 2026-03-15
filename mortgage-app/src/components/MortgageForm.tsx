@@ -145,7 +145,8 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate }) => {
       monthlySalary: parseNumericInput(monthlySalary),
       totalMonthlyDebtPayments: parseNumericInput(totalMonthlyDebt),
       // Pass the bank's TDSR limit as a decimal (e.g. 40 → 0.40).
-      bankTdsrLimit: bank ? bank.defaultTDSR / 100 : undefined,
+      // Generic calculator uses 40% as a standard industry benchmark.
+      bankTdsrLimit: bank ? bank.defaultTDSR / 100 : 0.40,
     };
 
     onCalculate(input);
@@ -190,20 +191,8 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate }) => {
         </IonText>
       )}
 
-      {/* ---- Interest Rate (always shown so user can type a value) ---- */}
-      <IonItem>
-        <IonInput
-          label="Interest Rate (%)"
-          labelPlacement="stacked"
-          type="number"
-          inputMode="decimal"
-          placeholder="e.g. 9.85"
-          value={interestRate}
-          onIonInput={(e) => setInterestRate(e.detail.value ?? '')}
-          required
-        />
-      </IonItem>
-      {/* Show rate dropdown only when a bank provides rate options. */}
+      {/* ---- Interest Rate ---- */}
+      {/* Bank calculator: show a dropdown with the bank's available rates. */}
       {bank && bank.interestRates.length > 0 && (
         <IonItem>
           <IonSelect
@@ -218,6 +207,21 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate }) => {
               </IonSelectOption>
             ))}
           </IonSelect>
+        </IonItem>
+      )}
+      {/* Generic calculator: show a text input so the user can type any rate. */}
+      {!bank && (
+        <IonItem>
+          <IonInput
+            label="Interest Rate (%)"
+            labelPlacement="stacked"
+            type="number"
+            inputMode="decimal"
+            placeholder="e.g. 9.85"
+            value={interestRate}
+            onIonInput={(e) => setInterestRate(e.detail.value ?? '')}
+            required
+          />
         </IonItem>
       )}
       {errors.interestRate && (
