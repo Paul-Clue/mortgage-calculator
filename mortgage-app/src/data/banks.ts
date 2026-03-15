@@ -36,9 +36,6 @@ export interface BankConfig {
 
   /** Default total-debt-service ratio shown in the form (percent) */
   defaultTDSR: number;
-
-  /** Filename of the bank's markdown info file in /banks (e.g. "jn-bank.md") */
-  markdownFile: string;
 }
 
 /* --------------------------------------------------------------------------
@@ -57,7 +54,6 @@ export const banks: BankConfig[] = [
     maxTermYears: 40,
     maxAgeAtMaturity: 70,
     defaultTDSR: 40,
-    markdownFile: 'jn-bank.md',
   },
   {
     id: 'vmbs',
@@ -69,7 +65,6 @@ export const banks: BankConfig[] = [
     maxTermYears: 35,
     maxAgeAtMaturity: 70,
     defaultTDSR: 45,
-    markdownFile: 'vmbs.md',
   },
   {
     id: 'sagicor',
@@ -81,7 +76,6 @@ export const banks: BankConfig[] = [
     maxTermYears: 35,
     maxAgeAtMaturity: 70,
     defaultTDSR: 45,
-    markdownFile: 'sagicor.md',
   },
   {
     id: 'scotiabank',
@@ -93,7 +87,6 @@ export const banks: BankConfig[] = [
     maxTermYears: 30,
     maxAgeAtMaturity: 70,
     defaultTDSR: 40,
-    markdownFile: 'scotiabank.md',
   },
   {
     id: 'ncb',
@@ -105,7 +98,6 @@ export const banks: BankConfig[] = [
     maxTermYears: 30,
     maxAgeAtMaturity: 70,
     defaultTDSR: 45,
-    markdownFile: 'ncb.md',
   },
   {
     id: 'jmmb',
@@ -117,7 +109,6 @@ export const banks: BankConfig[] = [
     maxTermYears: 35,
     maxAgeAtMaturity: 65,
     defaultTDSR: 45,
-    markdownFile: 'jmmb.md',
   },
   {
     id: 'first-caribbean',
@@ -129,7 +120,6 @@ export const banks: BankConfig[] = [
     maxTermYears: 35,
     maxAgeAtMaturity: 70,
     defaultTDSR: 42,
-    markdownFile: 'first-caribbean.md',
   },
 ];
 

@@ -6,8 +6,13 @@
     
     <base href="/" />
     
-    <!-- Content Security Policy for XSS protection -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self';" />
+    <!-- Content Security Policy for XSS protection.
+         - 'unsafe-inline' and 'unsafe-eval' on script-src are needed by Vite's
+           dev server (HMR). A production-only CSP could drop 'unsafe-eval'.
+         - font-src and style-src include Google Fonts for future use.
+         - connect-src allows https: for analytics or API endpoints.
+         - img-src allows https: for CDN-hosted images. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;" />
     
     <meta name="color-scheme" content="light dark" />
     <meta
