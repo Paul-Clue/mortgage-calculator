@@ -87,7 +87,7 @@ const BankCalculatorPage: React.FC = () => {
         </div>
 
         {/* The mortgage input form, pre-filled with this bank's defaults. */}
-        <MortgageForm bank={bank} onCalculate={handleCalculate} />
+        <MortgageForm bank={bank} onCalculate={handleCalculate} onReset={() => setResult(null)} />
 
         {/* Results appear below the form after calculation. */}
         {result && <ResultsDisplay result={result} />}

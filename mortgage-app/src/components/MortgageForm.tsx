@@ -38,13 +38,16 @@ interface MortgageFormProps {
 
   /** Called when the user submits a valid form */
   onCalculate: (input: MortgageInput) => void;
+
+  /** Called when the user resets the form (so the parent can clear results) */
+  onReset?: () => void;
 }
 
 /**
  * The main mortgage input form. Pre-fills fields from the bank config
  * if provided, otherwise starts empty for the generic calculator.
  */
-const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate }) => {
+const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset }) => {
   /* ---- Form state ---- */
   const [age, setAge] = useState<string>('');
   const [propertyPrice, setPropertyPrice] = useState<string>('');
@@ -150,6 +153,41 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate }) => {
     };
 
     onCalculate(input);
+  };
+
+  /**
+   * Reset the form to its initial state. For bank calculators, this restores
+   * the bank's default values (rate, LTV, term). For the generic calculator,
+   * all fields are cleared to empty strings. Also clears validation errors
+   * and notifies the parent to clear any displayed results.
+   */
+  const handleReset = () => {
+    // Clear all user-entered fields.
+    setAge('');
+    setPropertyPrice('');
+    setMonthlySalary('');
+    setTotalMonthlyDebt('');
+    setAnnualPropertyTax('');
+    setAnnualInsurance('');
+
+    // For bank calculators, restore bank defaults. For generic, clear everything.
+    if (bank) {
+      setInterestRate(String(bank.defaultRate));
+      setLtv(String(bank.defaultLTV));
+      setLoanTerm(String(bank.maxTermYears));
+    } else {
+      setInterestRate('');
+      setLtv('');
+      setLoanTerm('');
+    }
+
+    // Clear all validation errors.
+    setErrors({});
+
+    // Notify the parent to clear any displayed calculation results.
+    if (onReset) {
+      onReset();
+    }
   };
 
   return (
@@ -355,10 +393,13 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate }) => {
         </IonText>
       )}
 
-      {/* ---- Submit Button ---- */}
-      <div style={{ padding: '16px' }}>
-        <IonButton expand="block" color="primary" onClick={handleSubmit}>
+      {/* ---- Submit and Reset Buttons ---- */}
+      <div style={{ padding: '16px', display: 'flex', gap: '12px' }}>
+        <IonButton expand="block" color="primary" onClick={handleSubmit} style={{ flex: 1 }}>
           Calculate Mortgage
+        </IonButton>
+        <IonButton expand="block" color="medium" fill="outline" onClick={handleReset} style={{ flex: 1 }}>
+          Clear
         </IonButton>
       </div>
     </IonList>

@@ -52,7 +52,7 @@ const GenericCalculatorPage: React.FC = () => {
 
       <IonContent className="ion-padding">
         {/* Pass null for bank so the form starts with empty fields. */}
-        <MortgageForm bank={null} onCalculate={handleCalculate} />
+        <MortgageForm bank={null} onCalculate={handleCalculate} onReset={() => setResult(null)} />
 
         {/* Results appear below the form after calculation. */}
         {result && <ResultsDisplay result={result} />}
