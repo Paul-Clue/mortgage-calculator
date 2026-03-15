@@ -333,9 +333,15 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         />
       </IonItem>
       {bank && (
-        <IonNote style={{ paddingLeft: 16, fontSize: '0.8rem' }}>
-          Max LTV for {bank.name}: {bank.maxLTV}%
-        </IonNote>
+        <>
+          <IonNote style={{ paddingLeft: 16, fontSize: '0.8rem' }}>
+            Max LTV for {bank.name}: {bank.maxLTV}%
+          </IonNote>
+          <IonNote style={{ paddingLeft: 16, fontSize: '0.8rem' }}>
+            Max term for {bank.name}: {bank.maxTermYears} years
+            (maturity age: {bank.maxAgeAtMaturity})
+          </IonNote>
+        </>
       )}
       {errors.ltv && (
         <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
@@ -356,12 +362,6 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
           required
         />
       </IonItem>
-      {bank && (
-        <IonNote style={{ paddingLeft: 16, fontSize: '0.8rem' }}>
-          Max term for {bank.name}: {bank.maxTermYears} years
-          (maturity age: {bank.maxAgeAtMaturity})
-        </IonNote>
-      )}
       {errors.loanTerm && (
         <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
           <p>{errors.loanTerm}</p>
