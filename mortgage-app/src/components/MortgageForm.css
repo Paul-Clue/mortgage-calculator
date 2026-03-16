@@ -1,0 +1,88 @@
+/* ==========================================================================
+   MortgageForm Styles — Dark theme
+   --------------------------------------------------------------------------
+   Styles for the mortgage input form. Dark input fields with rounded borders,
+   matching the reference fintech app design.
+   ========================================================================== */
+
+/* The form list container — no background, lets the page bg show through. */
+.mortgage-form {
+  background: transparent;
+}
+
+/* Each form field row — dark surface with rounded corners and subtle border. */
+.mortgage-form ion-item {
+  --background: var(--app-input-bg);
+  --border-color: var(--app-input-border);
+  border: 1px solid var(--app-input-border);
+  border-radius: var(--app-radius);
+  margin-bottom: 12px;
+  --min-height: 60px;
+  --inner-border-width: 0;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+/* Highlight the field border on focus. */
+.mortgage-form ion-item.item-has-focus {
+  border-color: var(--app-accent);
+}
+
+/* Input label styling — muted color above the field value. */
+.mortgage-form ion-item ion-input,
+.mortgage-form ion-item ion-select {
+  --color: var(--app-text-primary);
+  --placeholder-color: var(--app-text-muted);
+  font-size: 1rem;
+}
+
+/* Helper notes between fields. */
+.mortgage-form .form-note {
+  color: var(--app-text-muted);
+  font-size: 0.8rem;
+  padding: 0 4px 8px 4px;
+  display: block;
+}
+
+/* Validation error messages below fields. */
+.mortgage-form .form-error {
+  color: var(--ion-color-danger);
+  font-size: 0.85rem;
+  padding: 0 4px 4px 4px;
+  margin-top: -4px;
+  margin-bottom: 4px;
+}
+
+.mortgage-form .form-error p {
+  margin: 0;
+}
+
+/* Button container at the bottom of the form. */
+.mortgage-form .form-buttons {
+  display: flex;
+  gap: 12px;
+  padding: 20px 0 8px 0;
+}
+
+/* Calculate button — full blue accent. */
+.mortgage-form .form-buttons .calc-button {
+  --background: var(--app-accent);
+  --background-hover: var(--app-accent-hover);
+  --border-radius: var(--app-radius);
+  --color: #ffffff;
+  flex: 1;
+  min-height: 52px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Clear / reset button. */
+.mortgage-form .form-buttons .clear-button {
+  --border-color: var(--app-border);
+  --color: var(--app-text-secondary);
+  --border-radius: var(--app-radius);
+  flex: 1;
+  min-height: 52px;
+  font-weight: 600;
+  font-size: 1rem;
+}

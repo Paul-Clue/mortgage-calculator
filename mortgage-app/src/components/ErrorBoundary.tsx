@@ -88,21 +88,24 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
               height: '100%',
               gap: '16px',
               padding: '32px',
+              color: 'var(--app-text-primary)',
             }}>
               <IonIcon
                 icon={alertCircleOutline}
                 style={{ fontSize: '64px', color: 'var(--ion-color-danger)' }}
               />
               <IonText>
-                <h2>Something went wrong</h2>
+                <h2 style={{ color: 'var(--app-text-primary)' }}>Something went wrong</h2>
               </IonText>
-              <IonText color="medium">
-                <p>{this.state.errorMessage}</p>
+              <IonText>
+                <p style={{ color: 'var(--app-text-secondary)' }}>{this.state.errorMessage}</p>
               </IonText>
               <IonButton onClick={this.handleRetry} color="primary">
                 Try Again
               </IonButton>
-              <IonButton onClick={this.handleGoHome} fill="outline" color="medium">
+              <IonButton onClick={this.handleGoHome} fill="outline"
+                style={{ '--border-color': 'var(--app-border)', '--color': 'var(--app-text-secondary)' } as React.CSSProperties}
+              >
                 Go to Home
               </IonButton>
             </div>

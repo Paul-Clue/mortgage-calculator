@@ -9,14 +9,11 @@
 import { useState, useEffect } from 'react';
 import {
   IonItem,
-  // IonLabel,
   IonInput,
   IonSelect,
   IonSelectOption,
   IonButton,
   IonList,
-  IonText,
-  IonNote,
 } from '@ionic/react';
 import { BankConfig } from '../data/banks';
 import { MortgageInput } from '../calculators/mortgage';
@@ -31,6 +28,7 @@ import {
   validateSalaryDebtPair,
   parseNumericInput,
 } from '../utils/validation';
+import './MortgageForm.css';
 
 interface MortgageFormProps {
   /** Bank configuration (null for the generic calculator) */
@@ -241,7 +239,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
   };
 
   return (
-    <IonList>
+    <IonList className="mortgage-form">
       {/* ---- Age (optional) ---- */}
       <IonItem>
         <IonInput
@@ -255,9 +253,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         />
       </IonItem>
       {errors.age && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.age}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.age}</p></div>
       )}
 
       {/* ---- Property Price ---- */}
@@ -275,9 +271,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         />
       </IonItem>
       {errors.propertyPrice && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.propertyPrice}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.propertyPrice}</p></div>
       )}
 
       {/* ---- Interest Rate ---- */}
@@ -314,9 +308,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         </IonItem>
       )}
       {errors.interestRate && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.interestRate}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.interestRate}</p></div>
       )}
 
       {/* ---- Loan-to-Value ---- */}
@@ -334,19 +326,17 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
       </IonItem>
       {bank && (
         <>
-          <IonNote style={{ paddingLeft: 16, fontSize: '0.8rem' }}>
+          <span className="form-note">
             Max LTV for {bank.name}: {bank.maxLTV}%
-          </IonNote>
-          <IonNote style={{ paddingLeft: 16, fontSize: '0.8rem' }}>
+          </span>
+          <span className="form-note">
             Max term for {bank.name}: {bank.maxTermYears} years
             (maturity age: {bank.maxAgeAtMaturity})
-          </IonNote>
+          </span>
         </>
       )}
       {errors.ltv && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.ltv}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.ltv}</p></div>
       )}
 
       {/* ---- Loan Term ---- */}
@@ -363,9 +353,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         />
       </IonItem>
       {errors.loanTerm && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.loanTerm}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.loanTerm}</p></div>
       )}
 
       {/* ---- Optional: Monthly Salary (paired with debt payments) ---- */}
@@ -382,16 +370,14 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         />
       </IonItem>
       {errors.monthlySalary && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.monthlySalary}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.monthlySalary}</p></div>
       )}
 
       {/* ---- Optional: Total Monthly Debt Payments (paired with salary) ---- */}
-      <IonNote style={{ paddingLeft: 16, fontSize: '0.8rem' }}>
+      <span className="form-note">
         Include all existing loan and credit card payments (excluding this mortgage).
         Fill in both salary and debt to see your TDSR eligibility.
-      </IonNote>
+      </span>
       <IonItem>
         <IonInput
           label="Total Monthly Debt Payments (JMD, optional)"
@@ -405,9 +391,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         />
       </IonItem>
       {errors.totalMonthlyDebt && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.totalMonthlyDebt}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.totalMonthlyDebt}</p></div>
       )}
 
       {/* ---- Optional: Annual Property Tax ---- */}
@@ -424,9 +408,7 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         />
       </IonItem>
       {errors.annualPropertyTax && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.annualPropertyTax}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.annualPropertyTax}</p></div>
       )}
 
       {/* ---- Optional: Annual Insurance ---- */}
@@ -443,17 +425,15 @@ const MortgageForm: React.FC<MortgageFormProps> = ({ bank, onCalculate, onReset 
         />
       </IonItem>
       {errors.annualInsurance && (
-        <IonText color="danger" style={{ paddingLeft: 16, fontSize: '0.85rem' }}>
-          <p>{errors.annualInsurance}</p>
-        </IonText>
+        <div className="form-error"><p>{errors.annualInsurance}</p></div>
       )}
 
       {/* ---- Submit and Reset Buttons ---- */}
-      <div style={{ padding: '16px', display: 'flex', gap: '12px' }}>
-        <IonButton expand="block" color="primary" onClick={handleSubmit} style={{ flex: 1 }}>
+      <div className="form-buttons">
+        <IonButton expand="block" className="calc-button" onClick={handleSubmit}>
           Calculate Mortgage
         </IonButton>
-        <IonButton expand="block" color="medium" fill="outline" onClick={handleReset} style={{ flex: 1 }}>
+        <IonButton expand="block" fill="outline" className="clear-button" onClick={handleReset}>
           Clear
         </IonButton>
       </div>

@@ -1,7 +1,55 @@
-/* BankButton styles — kept minimal since Ionic provides most of the styling. */
+/* ==========================================================================
+   BankButton Styles — Dark theme
+   --------------------------------------------------------------------------
+   Full-width dark rounded buttons for each bank on the home screen.
+   Uses a plain <button> for full CSS control (no Ionic Shadow DOM).
+   Dark surface with subtle border, matching the reference fintech design.
+   ========================================================================== */
 
 .bank-button {
-  --border-radius: 8px;
+  display: block;
+  width: 100%;
+  padding: 16px 20px;
+  background-color: var(--app-surface);
+  color: var(--app-text-primary);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  font-family: inherit;
+}
+
+/* Subtle highlight on hover / active / focus. */
+.bank-button:hover,
+.bank-button:focus-visible {
+  border-color: var(--app-accent);
+  background-color: var(--app-surface-hover);
+}
+
+.bank-button:active {
+  background-color: var(--app-surface-hover);
+  transform: scale(0.98);
+}
+
+/* Vertical stack: logo on top, text below, both centered. */
+.bank-button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Bank logo image inside the button.
+   Fixed width ensures logos align across buttons regardless of image size. */
+.bank-button-logo {
+  width: 48px;
+  height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
 }

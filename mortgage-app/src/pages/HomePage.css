@@ -1,7 +1,37 @@
-/* HomePage styles */
+/* ==========================================================================
+   HomePage Styles — Dark theme
+   --------------------------------------------------------------------------
+   Vertical stack of bank buttons with generous spacing and a welcome header.
+   ========================================================================== */
 
+/* Welcome heading area at the top of the home page. */
+.home-header {
+  text-align: center;
+  padding: 24px 0 8px 0;
+}
+
+.home-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--app-text-primary);
+  margin: 0 0 4px 0;
+}
+
+.home-header p {
+  color: var(--app-text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Container for all bank buttons — vertical flexbox with spacing. */
 .bank-buttons-container {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* The generic calculator button at the bottom, separated from bank buttons. */
+.generic-calc-container {
+  margin-top: 28px;
 }

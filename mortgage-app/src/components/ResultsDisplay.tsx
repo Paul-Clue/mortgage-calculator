@@ -16,6 +16,7 @@ import {
 } from '@ionic/react';
 import { MortgageResult } from '../calculators/mortgage';
 import { formatCurrency, formatDate } from '../utils/format';
+import './ResultsDisplay.css';
 
 interface ResultsDisplayProps {
   /** The mortgage calculation result to display */
@@ -36,14 +37,14 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ result }) => {
   const showTdsr = result.tdsrPercent !== undefined;
 
   return (
-    <div>
+    <div className="results-display">
       {/* ---- Monthly Payment Card ---- */}
       <IonCard>
         <IonCardHeader>
           <IonCardTitle>Monthly Mortgage Payment</IonCardTitle>
         </IonCardHeader>
         <IonCardContent>
-          <p style={{ fontSize: '1.8rem', fontWeight: 700, color: 'var(--ion-color-primary)' }}>
+          <p className="payment-amount">
             {formatCurrency(result.monthlyPayment)}
           </p>
         </IonCardContent>
