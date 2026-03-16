@@ -42,8 +42,8 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
-/* Dark mode — auto-detected from OS preference */
-import '@ionic/react/css/palettes/dark.system.css';
+/* Dark mode — always enabled for the dark fintech theme */
+import '@ionic/react/css/palettes/dark.always.css';
 
 /* Theme variables */
 import './theme/variables.css';

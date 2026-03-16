@@ -1,0 +1,37 @@
+/* ==========================================================================
+   ResultsDisplay Styles — Dark theme
+   --------------------------------------------------------------------------
+   Dark cards with subtle borders for displaying mortgage calculation results.
+   ========================================================================== */
+
+/* Container for all result cards. */
+.results-display {
+  margin-top: 20px;
+}
+
+/* The large monthly payment amount. */
+.results-display .payment-amount {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--app-accent);
+  margin: 0;
+}
+
+/* List items within result cards — transparent bg, subtle dividers. */
+.results-display ion-card ion-list {
+  background: transparent !important;
+}
+
+.results-display ion-card ion-item {
+  --background: transparent;
+  --border-color: var(--app-border);
+  border: none;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+/* End-slot labels (values on the right side). */
+.results-display ion-card ion-item ion-label[slot="end"] {
+  text-align: right;
+  color: var(--app-text-primary);
+}

@@ -76,11 +76,12 @@ const BankCalculatorPage: React.FC = () => {
 
       <IonContent className="ion-padding">
         {/* Link to the bank's info page. */}
-        <div style={{ textAlign: 'right', marginBottom: 8 }}>
+        <div style={{ textAlign: 'right', marginBottom: 12 }}>
           <IonButton
             fill="outline"
             size="small"
             onClick={() => navigate(`/bank/${bankId}/info`)}
+            style={{ '--border-color': 'var(--app-border)', '--color': 'var(--app-text-secondary)' } as React.CSSProperties}
           >
             View Bank Details
           </IonButton>

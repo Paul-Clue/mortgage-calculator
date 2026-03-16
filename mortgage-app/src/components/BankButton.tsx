@@ -5,8 +5,8 @@
    Tapping it navigates to the bank's mortgage calculator page.
    ========================================================================== */
 
-import { IonButton } from '@ionic/react';
 import { useNavigate } from 'react-router-dom';
+import './BankButton.css';
 
 interface BankButtonProps {
   /** The bank's unique ID slug used in the route (e.g. "jn-bank") */
@@ -14,13 +14,17 @@ interface BankButtonProps {
 
   /** The bank's display name (e.g. "JN Bank") */
   bankName: string;
+
+  /** Optional path to a logo image. When provided, the logo is shown instead of text. */
+  logoSrc?: string;
 }
 
 /**
- * Renders a full-width button for a bank on the Home screen.
+ * Renders a full-width dark button for a bank on the Home screen.
+ * Uses a plain button element for full CSS control over the dark theme styling.
  * Navigates to /bank/:bankId when tapped.
  */
-const BankButton: React.FC<BankButtonProps> = ({ bankId, bankName }) => {
+const BankButton: React.FC<BankButtonProps> = ({ bankId, bankName, logoSrc }) => {
   const navigate = useNavigate();
 
   /** Navigate to the bank calculator page. */
@@ -29,15 +33,24 @@ const BankButton: React.FC<BankButtonProps> = ({ bankId, bankName }) => {
   };
 
   return (
-    <IonButton
-      expand="block"
-      color="secondary"
+    <button
       onClick={handleClick}
       className="bank-button"
-      style={{ margin: '8px 0', minHeight: '52px', fontSize: '1rem' }}
+      type="button"
     >
-      {bankName}
-    </IonButton>
+      {logoSrc ? (
+        <span className="bank-button-content">
+          <img
+            src={logoSrc}
+            alt={bankName}
+            className="bank-button-logo"
+          />
+          <span>{bankName}</span>
+        </span>
+      ) : (
+        bankName
+      )}
+    </button>
   );
 };
 
